@@ -9,7 +9,27 @@ class CashRegister
     end
 
     def add_item(title,price)
-        @total += price
+      if quantity > 1
+          count = 0
+          while count < quantity
+            @items << title
+            count += count
+          end
+          @items << title
+      end
+        @total += price * quantity
+        @last_transaction_amount = @total
+        @total
+    end
+
+    def apply_discount()
+      if discount > 0
+        @discount = @discount / 100.to_f
+        @total = @total - (@total * (@discount))
+        "After the discount, the total comes to$#{total.to_i}"
+      else
+        "There is no discount to apply"
+      end
     end
 
 end
